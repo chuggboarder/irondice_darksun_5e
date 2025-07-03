@@ -1,0 +1,160 @@
+%%%%%%%% CREATE DOCUMENT STRUCTURE %%%%%%%%
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ebgaramond}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage{csquotes}
+\usepackage[toc,page]{appendix}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{wrapfig}
+\usepackage{tikz}
+\usepackage{titling}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{ltablex}
+\usepackage{colortbl}
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{watermark}
+\usepackage{yfonts}
+\usepackage{fdsymbol}
+
+% bibliography settings
+\usepackage[style=apa, backend=biber]{biblatex}
+\bibliography{ref}
+
+% Defining new editor type for Biblatex
+\NewBibliographyString{illustrator}
+\NewBibliographyString{illustrators}
+\NewBibliographyString{byillustrator}
+\NewBibliographyString{cbyillustrator}
+\NewBibliographyString{typeillustrator}
+\NewBibliographyString{typeillustrators}
+
+\DefineBibliographyStrings{english}{%
+  references       = {Works Used},
+  illustrator      = {illustrator},
+  illustrators     = {illustrators},
+  typeillustrator  = {illustrator},
+  typeillustrators = {illustrators},
+  byillustrator    = {illustrated by},
+  cbyillustrator   = {illustr\adddot},
+}
+
+% The important DnD red
+\definecolor{maroon}{HTML}{4a2b18}
+
+% It sets your hline colour
+\arrayrulecolor{maroon}
+
+
+% Change \texttt{} to split on a line like a url.
+\renewcommand{\texttt}[1]{%
+  \begingroup
+  \ttfamily
+  \begingroup\lccode`~=`/\lowercase{\endgroup\def~}{/\discretionary{}{}{}}%
+  \begingroup\lccode`~=`[\lowercase{\endgroup\def~}{[\discretionary{}{}{}}%
+  \begingroup\lccode`~=`.\lowercase{\endgroup\def~}{.\discretionary{}{}{}}%
+  \catcode`/=\active\catcode`[=\active\catcode`.=\active
+  \scantokens{#1\noexpand}%
+  \endgroup
+}
+
+% color large sections by encapsulating them into a single command: \colorsections{color}{text}.
+\newcommand{\colorsections}[2]{{\leavevmode\color{#1}#2}}
+
+% circles text
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt,line width=0.2pt] (char) {#1};}}
+
+% Skull pictogram command
+\DeclareFontFamily{U}{skulls}{}
+\DeclareFontShape{U}{skulls}{m}{n}{ <-> skull }{}
+\newcommand{\skull}{\text{\usefont{U}{skulls}{m}{n}\symbol{'101}}}
+
+
+%%% Format section headers
+\makeatletter
+
+\let\oldsection\section
+\let\oldsubsection\subsection
+
+\def\section{\@ifstar\s@section\@section}
+\def\subsection{\@ifstar\s@subsection\@subsection}
+
+% numbered section
+\newcommand{\@section}[2][\relax]{
+% #1 is the section counter; #2 is the section name.
+% #1 hates being changed (colour is ok); #2 can be freely stylised.
+    \vspace{-0.5em}
+        % change format of section name here
+        \oldsection[\textcolor{maroon}{#1}]{\textcolor{maroon}{\textsc{#2}}}
+    \vspace{-0.2em}
+    \hrule
+    \vspace{0.7em}
+}
+
+% unnumbered section
+\newcommand{\s@section}[1]{
+% unnumbered (sub)sections do not have a counter,
+% so #1 is the section name
+    \vspace{-0.5em}
+        \oldsection*{\textcolor{maroon}{\textsc{#1}}}
+    \vspace{-0.2em}
+    \hrule
+    \medskip
+}
+
+% numbered subsection
+\newcommand{\@subsection}[2][\relax]{
+    \vspace{-0.5em}
+        \oldsubsection[\textcolor{maroon}{#1}]{\textcolor{maroon}{\textsc{#2}}}
+    \vspace{-0.2em}
+}
+
+% unnumbered subsection
+\newcommand{\s@subsection}[1]{
+    \vspace{-0.5em}
+        \oldsubsection*{\textcolor{maroon}{\textsc{#1}}}
+    \vspace{-0.2em}
+}
+\makeatother
+
+% Not using the titlesec package for this due to this issue:
+% https://github.com/jbezos/titlesec/issues/64
+% But this is how you could:
+
+% \usepackage{titlesec}
+% \titlespacing*{\section}{0pt}{2mm}{1mm}
+% \titlespacing*{\subsection}{0pt}{2mm}{1mm}
+% \titleformat{\section}{\color{maroon}\Large\bfseries\scshape}{\thesection}{0.5em}{}[\titlerule\vspace*{4pt}]
+% \titleformat{\subsection}{\color{maroon}\large\bfseries\scshape}{\thesubsection}{0.5em}{}
+
+
+% Change footnote style to roman numerals and make the line maroon
+\renewcommand{\thefootnote}{\Roman{footnote}}
+\renewcommand{\footnoterule}{%
+  \kern -3pt
+  {\color{maroon}\hrule width 0.4\columnwidth height 0.5pt}
+  \kern 2.6pt
+}
+
+% make a line
+\newcommand{\HRule}{\color{maroon}\rule{\linewidth}{0.5mm}}
