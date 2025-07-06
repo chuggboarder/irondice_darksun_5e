@@ -53,7 +53,9 @@
 
 (cd "/media/chuggboarder/CHUGG/home/chuggboarder/irondice_darksun_5e/DND-5e-LaTeX-Character-Sheet-Template/")
 
-(cd "..")  
+(cd "..")
+
+
 
 ;; this is super slow - use lualatex
 ;; (async-shell-command "xelatex characters/zantwon.tex")
@@ -97,10 +99,11 @@
 
 (shell-command "git remote add origin https://github.com/chuggboarder/irondice_darksun_5e.git")
 
-(shell-command "git commit -m \"added my own files and removed things Im not using\"")
+(shell-command "git commit -m \"test on macbook\"")
 
 (shell-command "git push origin")
 
+(shell-command "git config --global push.default simple")
 
 
 ;; I manage identity on a per repo basis, hence --local
@@ -122,8 +125,25 @@
 (shell-command "git remote set-url origin https://******PAT********@github.com/chuggboarder/irondice_darksun_5e.git")
 
 
- 
+
+
+;; had to remove the setting book because its too large for the repo. Its now in gitignore.
 
 (shell-command "git reset --soft HEAD~1")
 
 (shell-command "git reset HEAD -- \"Dark Sun Campaign Setting 5E.pdf\"")
+
+
+
+
+(mkdir "~/projects/irondice_darksun_5e" t)
+(cd "~/projects/irondice_darksun_5e")
+
+(shell-command "git clone /Volumes/CHUGG/home/chuggboarder/irondice_darksun_5e")
+
+
+
+
+(shell-command "git remote -v")
+
+(shell-command "git remote rename origin chport")
